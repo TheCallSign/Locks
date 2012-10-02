@@ -1,0 +1,4 @@
+DocRoot=www
+Err404=Error404.html
+NoIndexError=NoIndex.html
+Port=9000

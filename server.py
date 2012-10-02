@@ -1,20 +1,23 @@
 #!/usr/bin/python
 #Name: Locks - Main Server Program for LockOn
 #FileName: server.py
-import BaseHTTPSe1rver, CoreHTTPServer
+import BaseHTTPServer, CoreHTTPServer
 import sys, socket, SocketServer, threading, os
 import urlparse
 from time import asctime
 __version__ = "0.3.0"
-__all__ = ["LocksServer"] 
+__all__ = ["LocksWebServer"] 
 DOC_ROOT = './www'
 PORT = 80
 
+###ALMOST DONE! Now to fix bugsAdd config.txt file to read options from
+### (That is PORT, DOC_ROOT, and more to come)
+
+
 # TODO:
-# 1 Add config.txt file to read options from (That is PORT, DOC_ROOT, and more to come)
-# 2 Want to add the 404 error and no index error 
+# 1 Want to add the 404 error and no index error 
 # to be custom pages that the user makes
-# 4 Faster. And handling more connections
+# (This can wait) 4 Faster. And handling more connections
  
 
 """ 
@@ -23,11 +26,10 @@ Locks Web Server
 Locks Web Server but now has dropped some components 
 (such as the cmd, map maker and the logger tool)
 
+
+
 Author: Beyonder
 
-CHANGELOG:
-
-01/10/2012: Striped it down just to the core (Possiably even better now that it doesn't have all that extra stuff...
 
  """
 
@@ -64,7 +66,7 @@ def main(server_class=BaseHTTPServer.HTTPServer, handler_class=locksHandler):
         currdir = os.curdir
     except OSError:
         os.mkdir(doc_root)
-	os.chdir(doc_root)
+	    os.chdir(doc_root)
         currdir = os.curdir
         print 'Done.\n'
     server_thread = threading.Thread(target=httpd.serve_forever)

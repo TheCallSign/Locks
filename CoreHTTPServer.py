@@ -2,7 +2,7 @@
 #Name: Locks - Core Web Server
 #FileName: CoreHTTPServer.py
 __version__ = "0.6.3"
-__all__ = ["CoreHTTPServer"]
+__all__ = ["CoreHTTPServer"] 
 """Simple HTTP Server.
 
 This module builds on BaseHTTPServer by implementing the standard GET

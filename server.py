@@ -6,7 +6,7 @@ import sys, socket, SocketServer, threading, os
 import urlparse
 from time import asctime
 __version__ = "0.3.0"
-__all__ = ["LocksServer"]
+__all__ = ["LocksServer"] 
 DOC_ROOT = './www'
 PORT = 80
 

@@ -1,4 +1,4 @@
 DocRoot=www
 Err404=error404.html
-NoIndexError=noindex.html
+AutomaticIndex=noindex.html
 Port=9000

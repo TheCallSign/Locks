@@ -6,7 +6,7 @@ import sys, socket, SocketServer, threading, os
 import urlparse
 from time import asctime
 from filetool import UserConfig
-__version__ = "0.4.0"
+__version__ = "0.4.1"
 __all__ = ["LocksWebServer"] 
 
 
@@ -55,8 +55,15 @@ def main(server_class=BaseHTTPServer.HTTPServer, handler_class=locksHandler):
     ConfigFile = UserConfig()
     doc_root = ConfigFile.doc_root
     port = ConfigFile.port
+    if port < 1024:
+        loginname = os.geteuid()
+        if loginname == 0:
+            pass
+        else:
+            print '[!]You have to be root to listen on ports under 1024.'
+            sys.exit(1)
     local_hostname = socket.gethostname ()
-    server_address = ('127.0.0.1', port)    
+    server_address = ('127.0.0.1', port)
     httpd = ThreadingHTTPServer(server_address, handler_class)
     try:
         os.chdir(doc_root) #Change to doc_root for security
@@ -69,6 +76,7 @@ def main(server_class=BaseHTTPServer.HTTPServer, handler_class=locksHandler):
     server_thread.daemon = True
     httpd.daemon_threads = True	
     server_thread.start()
+    print 'Listening on port: {}'.format(port)
     try:    
         while 1:
             raw_input()

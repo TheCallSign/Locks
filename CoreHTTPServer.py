@@ -30,7 +30,7 @@ except ImportError:
     from StringIO import StringIO
 ReadErr = ReadErrorPage()
 ConfigFile = UserConfig()
-    
+
 
 class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 

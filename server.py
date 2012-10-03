@@ -9,13 +9,10 @@ from filetool import UserConfig
 __version__ = "0.4.0"
 __all__ = ["LocksWebServer"] 
 
-###ALMOST DONE! Now to fix bugsAdd config.txt file to read options from
-### (That is PORT, DOC_ROOT, and more to come)
-
 
 # TODO:
-# 1 Want to add the 404 error and no index error 
-# to be custom pages that the user makes
+# Comments in config.txt
+# Change config.txt to config.ini
 # (This can wait) 4 Faster. And handling more connections
  
 

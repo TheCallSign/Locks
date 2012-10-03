@@ -6,7 +6,7 @@ __all__ = ["FileTool"]
 """ 
 File Tool
 
-Tool for reading and managing files with Locks (0.3.0)
+Tools for managing files, colors and more! For Locks.
 
 """
 
@@ -64,7 +64,7 @@ class ReadErrorPage():
 class UserConfig():
     """Config file """
     def __init__(self): 
-        config = open('config.txt', 'r+b')
+        config = open('config.ini', 'r+b')
         returnlist = []
         for line in config: 
             if line[0] == '#':
@@ -94,6 +94,24 @@ class UserConfig():
         config = open('config.txt', 'r+')
         config.write(template)
         config.close()
-             
+        
+class bcolors:
+    purple = '\033[95m'
+    blue = '\033[94m'
+    green = '\033[92m'
+    yellow = '\033[93m'
+    red = '\033[91m'
+    white = '\033[0m'
+    endc = '\033[0m'
+    
+    def disable(self):
+        purple = '\033[95m'  # Purple
+        blue = '\033[94m'  # Blue
+        green = '\033[92m' # Green
+        yellow = '\033[93m' # Yellow
+        red = '\033[91m'    # Red
+        white = '\033[0m'     # White
+        endc = '\033[0m'
+        
 
 

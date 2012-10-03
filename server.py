@@ -5,10 +5,9 @@ import BaseHTTPServer, CoreHTTPServer
 import sys, socket, SocketServer, threading, os
 import urlparse
 from time import asctime
-__version__ = "0.3.0"
+from filetool import UserConfig
+__version__ = "0.4.0"
 __all__ = ["LocksWebServer"] 
-DOC_ROOT = './www'
-PORT = 80
 
 ###ALMOST DONE! Now to fix bugsAdd config.txt file to read options from
 ### (That is PORT, DOC_ROOT, and more to come)
@@ -56,29 +55,28 @@ def exit(ext):
 def main(server_class=BaseHTTPServer.HTTPServer, handler_class=locksHandler):
     version = __version__
     print "Starting Locks Web Server..."
-    doc_root = DOC_ROOT
-    port = PORT
+    ConfigFile = UserConfig()
+    doc_root = ConfigFile.doc_root
+    port = ConfigFile.port
     local_hostname = socket.gethostname ()
     server_address = ('127.0.0.1', port)    
     httpd = ThreadingHTTPServer(server_address, handler_class)
     try:
-        os.chdir(doc_root)
+        os.chdir(doc_root) #Change to doc_root for security
         currdir = os.curdir
     except OSError:
         os.mkdir(doc_root)
-	    os.chdir(doc_root)
+        os.chdir(doc_root)
         currdir = os.curdir
-        print 'Done.\n'
     server_thread = threading.Thread(target=httpd.serve_forever)
     server_thread.daemon = True
     httpd.daemon_threads = True	
     server_thread.start()
-    extstat = None
     try:    
         while 1:
             raw_input()
     except:
-        print 'Exiting'
+        print '\nExiting'
 
 
 if __name__ == "__main__":

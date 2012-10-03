@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #Name: File Tool - File I/O Tool for Locks Web Server
 #FileName: filetool.py
-__version__ = "0.2.2"
+__version__ = "0.2.3"
 __all__ = ["FileTool"] 
 """ 
 File Tool

@@ -5,16 +5,15 @@ import BaseHTTPServer, CoreHTTPServer
 import sys, socket, SocketServer, threading, os
 import urlparse
 from time import asctime
-from filetool import UserConfig
-__version__ = "0.4.1"
+from filetool import UserConfig, bcolors
+__version__ = "0.4.2"
 __all__ = ["LocksWebServer"] 
 
 
 # TODO:
-# Comments in config.txt
-# Change config.txt to config.ini
-# (This can wait) 4 Faster. And handling more connections
- 
+# Comments in config.txt DONE!
+# Change config.txt to config.ini DONE!
+# Color in output (for errors and stuff)
 
 """ 
 Locks Web Server
@@ -51,7 +50,7 @@ def exit(ext):
 	
 def main(server_class=BaseHTTPServer.HTTPServer, handler_class=locksHandler):
     version = __version__
-    print "Starting Locks Web Server..."
+    print bcolors.green + "[*]" + bcolors.endc + "Starting Locks Web Server..."
     ConfigFile = UserConfig()
     doc_root = ConfigFile.doc_root
     port = ConfigFile.port
@@ -60,7 +59,7 @@ def main(server_class=BaseHTTPServer.HTTPServer, handler_class=locksHandler):
         if loginname == 0:
             pass
         else:
-            print '[!]You have to be root to listen on ports under 1024.'
+            print bcolors.yellow + '[!]You have to be root to listen on ports under 1024.' + bcolors.endc
             sys.exit(1)
     local_hostname = socket.gethostname ()
     server_address = ('127.0.0.1', port)
@@ -76,12 +75,12 @@ def main(server_class=BaseHTTPServer.HTTPServer, handler_class=locksHandler):
     server_thread.daemon = True
     httpd.daemon_threads = True	
     server_thread.start()
-    print 'Listening on port: {}'.format(port)
+    print bcolors.green + "[*]" + bcolors.endc +  'Listening on port:' + bcolors.blue +' {}'.format(port)
     try:    
         while 1:
             raw_input()
     except:
-        print '\nExiting'
+        print bcolors.green + "\n[*]" +  bcolors.red + 'Exiting'
 
 
 if __name__ == "__main__":

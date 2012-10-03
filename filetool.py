@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #Name: File Tool - File I/O Tool for Locks Web Server
 #FileName: filetool.py
-__version__ = "0.2.1"
+__version__ = "0.2.2"
 __all__ = ["FileTool"] 
 """ 
 File Tool
@@ -63,11 +63,15 @@ class ReadErrorPage():
         
 class UserConfig():
     """Config file """
-    def __init__(self): #XXX: Need to make sure what actual option it is returning value for.
-        config = open('config.txt', 'rb')
+    def __init__(self): 
+        config = open('config.txt', 'r+b')
         returnlist = []
-        for line in config: #COMMENTS!!!!!!!!
-            if not line[0] == '#':
+        for line in config: 
+            if line[0] == '#':
+                pass
+            elif line [0] == '\n':
+                pass
+            else:
                 [x, y] = line.split('=')
                 y = y.strip()
                 returnlist.append(y)
@@ -78,7 +82,15 @@ class UserConfig():
         self.port     = int(returnlist[3]) #Port needs to be interger
         
     def MakeConfig(self):
-        template = 'DocRoot=www\nErr404=Error404.html\nNoIndexError=NoIndex.html\nPort=9000'
+        template = '# Config File for Locks Web Server \n# Produced by: The Core 4 the Lan Team\n' \
+        '\n# DocumentRoot. Where your website is. Default is \'www\'' \
+        '\nDocRoot=www\n' \
+        '\n# Custom error pages for Error 404 (File not Found) and if there is no index.html in a directory.'\
+        '\nErr404=error404.html' \
+        '\nAutomaticIndex=noindex.html\n' \
+        '\n# Port for Locks to listen on.' \
+        '\nPort=9000'
+        
         config = open('config.txt', 'r+')
         config.write(template)
         config.close()

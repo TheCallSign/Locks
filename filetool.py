@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #Name: File Tool - File I/O Tool for Locks Web Server
 #FileName: filetool.py
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 __all__ = ["FileTool"] 
 """ 
 File Tool
@@ -66,10 +66,11 @@ class UserConfig():
     def __init__(self): #XXX: Need to make sure what actual option it is returning value for.
         config = open('config.txt', 'rb')
         returnlist = []
-        for line in config:
-            [x, y] = line.split('=')
-            y = y.strip()
-            returnlist.append(y)
+        for line in config: #COMMENTS!!!!!!!!
+            if not line[0] == '#':
+                [x, y] = line.split('=')
+                y = y.strip()
+                returnlist.append(y)
         config.close()
         self.doc_root = returnlist[0]
         self.err404   = returnlist[1]

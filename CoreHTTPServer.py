@@ -23,7 +23,7 @@ import cgi
 import sys
 import shutil
 import mimetypes
-from filetool import ReadErrorPage, UserConfig
+from filetool import ReadErrorPage, UserConfig, bcolors
 try:
     from cStringIO import StringIO
 except ImportError:

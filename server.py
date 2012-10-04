@@ -6,14 +6,14 @@ import sys, socket, SocketServer, threading, os
 import urlparse
 from time import asctime
 from filetool import UserConfig, bcolors
-__version__ = "0.4.2"
+__version__ = "0.4.3"
 __all__ = ["LocksWebServer"] 
 
 
 # TODO:
 # Comments in config.txt DONE!
 # Change config.txt to config.ini DONE!
-# Color in output (for errors and stuff)
+# Color in output (for errors and stuff) DONE!
 
 """ 
 Locks Web Server
@@ -59,8 +59,11 @@ def main(server_class=BaseHTTPServer.HTTPServer, handler_class=locksHandler):
         if loginname == 0:
             pass
         else:
-            print bcolors.yellow + '[!]You have to be root to listen on ports under 1024.' + bcolors.endc
+            print bcolors.yellow + '[!]You have to be root to listen on ports under 1024.'
             sys.exit(1)
+    if 65535 < port or port < 0:
+        print bcolors.yellow + '[!]Lol, you thought that not putting your port between 0-65535 would work!' 
+        sys.exit(1)
     local_hostname = socket.gethostname ()
     server_address = ('127.0.0.1', port)
     httpd = ThreadingHTTPServer(server_address, handler_class)
@@ -76,6 +79,7 @@ def main(server_class=BaseHTTPServer.HTTPServer, handler_class=locksHandler):
     httpd.daemon_threads = True	
     server_thread.start()
     print bcolors.green + "[*]" + bcolors.endc +  'Listening on port:' + bcolors.blue +' {}'.format(port)
+    print bcolors.purple
     try:    
         while 1:
             raw_input()
@@ -84,4 +88,7 @@ def main(server_class=BaseHTTPServer.HTTPServer, handler_class=locksHandler):
 
 
 if __name__ == "__main__":
-    exit(main ())
+    try:
+        exit(main ())
+    except TypeError:
+        pass

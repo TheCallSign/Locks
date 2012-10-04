@@ -72,9 +72,13 @@ class UserConfig():
             elif line [0] == '\n':
                 pass
             else:
-                [x, y] = line.split('=')
-                y = y.strip()
-                returnlist.append(y)
+                try:
+                    y = line.strip()
+                    [x, z] = y.split('=')
+                except:
+                    print bcolors.red + '[!]Error: ' + 'There is something weird about the Config file: ' + bcolors.blue + '{}'.format(line)
+                    sys.exit(1)
+                returnlist.append(z)
         config.close()
         self.doc_root = returnlist[0]
         self.err404   = returnlist[1]

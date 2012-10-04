@@ -106,7 +106,7 @@ class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         f.seek(0)
         self.send_response(200)
         encoding = sys.getfilesystemencoding()
-        self.send_header("Content-type", "text/html; charset=%s" % encoding)
+        self.send_header("Content-type", "text/html; charset={}".format(encoding))
         self.send_header("Content-Length", str(length))
         self.end_headers()
         return f
@@ -123,7 +123,7 @@ class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         f.seek(0)
         self.send_response(200)
         encoding = sys.getfilesystemencoding()
-        self.send_header("Content-type", "text/html; charset=%s" % encoding)
+        self.send_header("Content-type", "text/html; charset={}".format(encoding))
         self.send_header("Content-Length", str(length))
         self.end_headers()
         return f
@@ -171,7 +171,7 @@ class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         f.seek(0)
         self.send_response(200)
         encoding = sys.getfilesystemencoding()
-        self.send_header("Content-type", "text/html; charset=%s" % encoding)
+        self.send_header("Content-type", "text/html; charset={}".format(encoding))
         self.send_header("Content-Length", str(length))
         self.end_headers()
         return f
